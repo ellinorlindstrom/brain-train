@@ -39,7 +39,7 @@ export function addAttempt(
 
 export function getLatestScoreByDomain(domainId: DomainId): number | null {
   const attempts = getAttempts()
-    .filter((a) => a.domainId === domainId)
+    .filter((a) => a.domainId === domainId && a.source === 'test')
     .sort((a, b) => a.date.localeCompare(b.date))
   if (attempts.length === 0) return null
   return attempts[attempts.length - 1].score
