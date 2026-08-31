@@ -51,8 +51,14 @@ export default function MemoryGame({ onComplete, difficulty }: GameProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  function flashTile(tile: number) {
+    setActiveTile(tile)
+    window.setTimeout(() => setActiveTile(null), 200)
+  }
+
   function handleTileClick(tile: number) {
     if (phase !== 'input') return
+    flashTile(tile)
     if (tile === sequence[inputIndex]) {
       const nextIndex = inputIndex + 1
       if (nextIndex === sequence.length) {

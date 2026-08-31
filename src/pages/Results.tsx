@@ -4,7 +4,7 @@ import type { DomainId } from '../types'
 
 interface ResultsState {
   results: { domainId: DomainId; score: number }[]
-  source: 'weekly' | 'practice'
+  source: 'test' | 'practice'
 }
 
 function encouragement(avg: number): string {
@@ -42,7 +42,7 @@ export default function Results() {
     <div className="max-w-xl mx-auto py-10 px-4 flex flex-col items-center gap-8">
       <div className="text-center">
         <div className="text-sm text-slate-500 uppercase tracking-wide mb-2">
-          {state.source === 'weekly' ? 'Veckotest klart' : 'Träningspass klart'}
+          {state.source === 'test' ? 'Hjärntest klart' : 'Träningspass klart'}
         </div>
         <div className="text-6xl font-black text-sky-400">{avg}</div>
         <div className="text-slate-400 text-sm">genomsnittspoäng</div>

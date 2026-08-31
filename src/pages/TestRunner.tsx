@@ -7,7 +7,7 @@ import type { DomainId } from '../types'
 
 interface RunnerState {
   domainIds: DomainId[]
-  source: 'weekly' | 'practice'
+  source: 'test' | 'practice'
 }
 
 type Stage = 'intro' | 'playing'

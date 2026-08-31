@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import { DOMAINS } from '../domains'
-import { getDomainsTestedThisWeek, getLatestScoreByDomain } from '../storage'
+import { getLatestScoreByDomain } from '../storage'
 import type { DomainId } from '../types'
 
 export default function Dashboard() {
@@ -19,10 +19,6 @@ export default function Dashboard() {
     for (const d of DOMAINS) map.set(d.id, getLatestScoreByDomain(d.id))
     return map
   }, [])
-
-  const testedThisWeek = useMemo(() => getDomainsTestedThisWeek(), [])
-  const missingThisWeek = DOMAINS.filter((d) => !testedThisWeek.has(d.id))
-  const weeklyDone = missingThisWeek.length === 0
 
   const scoresWithData = DOMAINS.filter((d) => latestScores.get(d.id) !== null)
   const overall =
@@ -38,9 +34,8 @@ export default function Dashboard() {
     score: latestScores.get(d.id) ?? 0,
   }))
 
-  function startWeeklyTest() {
-    const domainIds = (missingThisWeek.length > 0 ? missingThisWeek : DOMAINS).map((d) => d.id)
-    navigate('/test', { state: { domainIds, source: 'weekly' } })
+  function startTest() {
+    navigate('/test', { state: { domainIds: DOMAINS.map((d) => d.id), source: 'test' } })
   }
 
   function practiceDomain(id: DomainId) {
@@ -51,21 +46,15 @@ export default function Dashboard() {
     <div className="max-w-3xl mx-auto py-10 px-4 flex flex-col gap-8">
       <header className="text-center">
         <h1 className="text-3xl font-black">Hjärnträning</h1>
-        <p className="text-slate-400 mt-1">Testa dig varje vecka och se hur du utvecklas</p>
+        <p className="text-slate-400 mt-1">Testa dig när du vill och se hur du utvecklas</p>
       </header>
 
       <div className="bg-slate-900 rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-6">
         <div className="text-center sm:text-left flex-1">
-          <div className="text-sm text-slate-500 uppercase tracking-wide">Veckans status</div>
-          {weeklyDone ? (
-            <p className="text-emerald-400 font-semibold mt-1">
-              Du har gjort veckans test på alla områden! 🎉
-            </p>
-          ) : (
-            <p className="text-slate-200 mt-1">
-              {testedThisWeek.size} av {DOMAINS.length} områden testade denna vecka.
-            </p>
-          )}
+          <div className="text-sm text-slate-500 uppercase tracking-wide">Hjärntest</div>
+          <p className="text-slate-200 mt-1">
+            Ett snabbt test av alla sex områden. Ta det när du vill för att se din status.
+          </p>
           {overall !== null && (
             <div className="text-slate-400 text-sm mt-2">
               Hjärnindex just nu: <span className="text-sky-400 font-bold">{overall}</span>
@@ -74,10 +63,10 @@ export default function Dashboard() {
           )}
         </div>
         <button
-          onClick={startWeeklyTest}
+          onClick={startTest}
           className="px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 active:scale-95 transition text-slate-950 font-semibold whitespace-nowrap"
         >
-          {weeklyDone ? 'Gör om veckotestet' : 'Kör veckotest'}
+          {overall === null ? 'Starta hjärntest' : 'Gör om hjärntestet'}
         </button>
       </div>
 

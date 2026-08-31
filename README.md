@@ -1,17 +1,18 @@
 # Hjärnträning
 
-En webbapp för att testa och träna olika delar av din hjärna varje vecka.
+En webbapp för att testa och träna olika delar av din hjärna.
 
 ## Vad appen gör
 
-- **Veckotest**: ett genererat test som täcker sex kognitiva områden — minne,
-  uppmärksamhet, snabbhet, logik, flexibilitet och språk. Ett nytt test går
-  att göra varje vecka för att följa utvecklingen.
+- **Hjärntest**: ett genererat test som täcker sex kognitiva områden — minne,
+  uppmärksamhet, snabbhet, logik, flexibilitet och språk. Kan tas när som
+  helst, så ofta man vill, för att följa utvecklingen.
 - **Fri träning**: valfritt område kan tränas när som helst, hur ofta som helst.
 - **Adaptiv svårighetsgrad**: varje övning blir svårare i takt med att dina
   senaste resultat förbättras (progressive overload).
 - **Utveckling över tid**: en radarprofil över dina senaste resultat och
-  linjediagram per område som visar hur poängen förändras vecka för vecka.
+  linjediagram per område som visar hur poängen förändras över varje
+  genomfört test.
 - **Hjärnindex**: ett samlat mått 0–100 baserat på dina senaste resultat.
   Det är ett eget, transparent mått — inte ett kliniskt IQ-test.
 
